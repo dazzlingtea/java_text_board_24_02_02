@@ -35,6 +35,10 @@ public class TxtBoardEx {
     
     makeTestData(articles);
     
+    if(articles.size() > 0) {
+    	articleLastId = articles.get(articles.size() - 1).id;
+    }
+    
     System.out.println("== 자바 텍스트 게시판 ==");
     System.out.println("== 프로그램 시작 ==");
 
