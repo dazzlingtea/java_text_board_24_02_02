@@ -30,7 +30,6 @@ public class TxtBoardEx {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
     int articleLastId = 0;
-    Article lastArticle = null;
     List<Article> articles = new ArrayList<>();
     
     makeTestData(articles);
@@ -58,8 +57,6 @@ public class TxtBoardEx {
     	  articleLastId++;
     	  
     	  Article article = new Article(id, title, content);
-    	  lastArticle = article;
-    	  
     	  articles.add(article); // list에 게시물 추가
     	  
     	  System.out.printf("%d번 게시물이 등록되었습니다.\n", id);
@@ -79,12 +76,12 @@ public class TxtBoardEx {
     	  
       }
       else if(cmd.equals("/usr/article/detail")) {
-    	  if(lastArticle == null) {
+    	  if(articles.isEmpty()) {
     		  System.out.println("게시물이 존재하지 않습니다."); 
     		  continue;
     	  }
     	  
-    	  Article article = lastArticle;
+    	  Article article = articles.get(articles.size() - 1);
     	  
     	  System.out.println("==게시물 상세보기==");
     	  System.out.printf("번호:%d\n제목:%s\n내용:%s\n",
