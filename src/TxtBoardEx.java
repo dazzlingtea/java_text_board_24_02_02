@@ -60,8 +60,9 @@ public class TxtBoardEx {
     	  Article article = new Article(id, title, content);
     	  lastArticle = article;
     	  
+    	  articles.add(article); // list에 게시물 추가
+    	  
     	  System.out.printf("%d번 게시물이 등록되었습니다.\n", id);
-    	  System.out.println("생성된 객체: "+article);
     	  continue;
       }
       else if(cmd.equals("/usr/article/list")) {
