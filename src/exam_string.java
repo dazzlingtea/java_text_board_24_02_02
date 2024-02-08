@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //query string 요청에 맞게 데이터를 처리하는 방법
 public class exam_string {
@@ -88,5 +90,33 @@ public class exam_string {
 		System.out.println("id : " + paraValues.get(idIndex));
 		int regDateIndex = paraNames.indexOf("regDate");
 		System.out.println("regDate : " + paraValues.get(regDateIndex));
+		
+		
+		System.out.println("===============");
+		/* https:// --> 프로토콜
+		 * https://www.naver.com/usr/article/list
+		 * ?
+		 * id=5&title=aaaa&content=bbbb&writerName=홍길동 --> 쿼리 스트링
+		 * /usr/article/list -> path 경로
+		 */
+		String queryString3 = "id=5&title=aaaa&content=bbbb&writerName=홍길동";
+		String[] queryStringBits3 = queryString3.split("&");
+		Map<String, String> params = new HashMap<>();
+		
+		for(String bit : queryStringBits3) {
+			String[] bitBits = bit.split("=");
+			params.put(bitBits[0], bitBits[1]); // key, value
+		}
+		System.out.println(params);
+		System.out.printf("id : %d\n", Integer.parseInt(params.get("id")));
+		System.out.printf("title : %s\n", params.get("title"));
+		System.out.printf("content : %s\n", params.get("content"));
+		System.out.printf("writerName : %s\n", params.get("writerName"));
+		
+		System.out.println("==반복문으로 전체 출력==");
+		for(String paramName : params.keySet()) {
+			String paramValue = params.get(paramName);
+			System.out.printf("%s : %s\n", paramName, paramValue);
+		}
 	}
 }
