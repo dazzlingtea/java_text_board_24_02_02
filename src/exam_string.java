@@ -118,5 +118,27 @@ public class exam_string {
 			String paramValue = params.get(paramName);
 			System.out.printf("%s : %s\n", paramName, paramValue);
 		}
+		
+		System.out.println("======================");
+		// 이것도 지저분하고 무식한 방법 -> 파싱로직을 메소드로 만들어 해결해야 함
+		// Util.getParams -> Util 클래스 생성
+		Map<String, String> params2 = Util.getParams(queryString2);
+		Map<String, String> params3 = Util.getParams(queryString3);
+	}
+}
+class Util { 
+	// main에서 쓰이는 메소드기 때문에 static
+	// 뭘 리턴해야 할까? map
+	static Map<String, String> getParams(String queryStr) {
+		Map<String, String> params = new HashMap<>();
+		
+		String[] queryStrBits = queryStr.split("&");
+		
+		for(String bit : queryStrBits) {
+			String[] bits = bit.split("=");
+			params.put(bits[0], bits[1]); // key, value
+		}
+
+		return params;
 	}
 }
