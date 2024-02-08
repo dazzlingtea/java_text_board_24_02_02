@@ -45,10 +45,12 @@ public class exam_string {
 		System.out.println("===============");
 		
 		// a=100&b....&d=10 -> d는 출력 불가, 즉 추가할 때마다 문제가 생김
+		// "c=30&a=100&b=20&d=40&e=-50"
 		// a,b,c ... 리스트1, 100,20,30,... 값 리스트2 -> 사실 비효율 -> Map 필요
 		List<String> paramNames = new ArrayList<>();
 		List<Integer> paramValues = new ArrayList<>();
-				
+		
+		// 압축해제 시작
 		for(String bit : queryStringBits) {
 			String[] bitBits = bit.split("=");
 			String paraName = bitBits[0];
@@ -57,6 +59,7 @@ public class exam_string {
 			paramNames.add(paraName);
 			paramValues.add(Integer.parseInt(paraValue));
 		}
+		// 압축 해제 끝
 		
 		for(int i=0; i < paramNames.size(); i++) {
 			String paramName = paramNames.get(i);
@@ -64,5 +67,26 @@ public class exam_string {
 			
 			System.out.printf("%s : %d\n", paramName, paramValue);
 		}
+		
+		System.out.println("===============");
+		// 데이터를 파싱, id가 다른 인덱스에 있어도 출력되도록 짜야 함
+		String queryString2 = "id=5&regDate=20230915&updateDate=20230916";
+		String[] queryStringBits2 = queryString2.split("&");
+		List<String> paraNames = new ArrayList<>();
+		List<Integer> paraValues = new ArrayList<>();
+		for(String bit : queryStringBits2) {
+			String[] bitBits = bit.split("=");
+			String paraName = bitBits[0];
+			String paraValue = bitBits[1];
+			
+			paraNames.add(paraName);
+			paraValues.add(Integer.parseInt(paraValue));
+		}
+		
+		// ->id 위치 찾은 후 value 가져오기(번거롭)
+		int idIndex = paraNames.indexOf("id");
+		System.out.println("id : " + paraValues.get(idIndex));
+		int regDateIndex = paraNames.indexOf("regDate");
+		System.out.println("regDate : " + paraValues.get(regDateIndex));
 	}
 }
